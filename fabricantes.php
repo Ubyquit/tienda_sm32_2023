@@ -68,7 +68,7 @@
                             </a>
                         </td>
                         <td>
-                            <a href="update/actualizar_fabricante.php">
+                            <a href="update/fabricante.php?id_fabricante=<?php echo $fila['id_fabricante']; ?>">
                                 <i class="bi bi-pencil-square text-warning" style="font-size: 1.5rem;"></i>
                             </a>
                         </td>
