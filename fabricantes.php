@@ -50,7 +50,7 @@
                 include('connection/connection.php');
 
                 $c = 1;
-                $consulta = "SELECT*FROM fabricante";
+                $consulta = "call p_verFabricantes()";
                 $query = mysqli_query($conn, $consulta);
 
                 while ($fila = mysqli_fetch_array($query)) {
