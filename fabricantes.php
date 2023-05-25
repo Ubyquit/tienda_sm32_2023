@@ -41,6 +41,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Fabricante</th>
+                    <th scope="col">Producto</th>
                     <th scope="col">Eliminar</th>
                     <th scope="col">Actualizar</th>
                 </tr>
@@ -60,7 +61,10 @@
                             <?php echo $c; ?>
                         </th>
                         <td>
-                            <?php echo $fila['nombre']; ?>
+                            <?php echo $fila['fabricante']; ?>
+                        </td>
+                        <td>
+                            <?php echo $fila['contador']; ?>
                         </td>
                         <td>
                             <a href="delete/eliminar_fabrincante.php?id_fabricante=<?php echo $fila['id_fabricante']; ?>">
