@@ -19,70 +19,71 @@
         <!-- place navbar here -->
     </header>
     <main>
-
-        <!-- ========== Start formulario ========== -->
-        <form action="insert/registro_fabricante.php" method="post">
-            <div class="mb-3">
-                <label class="form-label">Ingresa un fabricante</label>
-                <input name="nombre_fabricante" type="text" class="form-control" required>
+        <div class="row">
+            <div class="col-md-4">
+                <!-- ========== Start formulario ========== -->
+                <form action="insert/registro_fabricante.php" method="post">
+                    <div class="mb-3">
+                        <label class="form-label">Ingresa un fabricante</label>
+                        <input name="nombre_fabricante" type="text" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+                <!-- ========== End formulario ========== -->
             </div>
-            <button type="submit" class="btn btn-primary">Enviar</button>
-        </form>
+            <div class="col-md-8">
+                <!-- ========== Start table ========== -->
+                <table class="table table-dark table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Fabricante</th>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Eliminar</th>
+                            <th scope="col">Actualizar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        include('connection/connection.php');
 
-        <form action="" method="post">
+                        $c = 1;
+                        $consulta = "call p_verFabricantes()";
+                        $query = mysqli_query($conn, $consulta);
 
-        </form>
-
-        <!-- ========== End formulario ========== -->
-
-        <!-- ========== Start table ========== -->
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Fabricante</th>
-                    <th scope="col">Producto</th>
-                    <th scope="col">Eliminar</th>
-                    <th scope="col">Actualizar</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                include('connection/connection.php');
-
-                $c = 1;
-                $consulta = "call p_verFabricantes()";
-                $query = mysqli_query($conn, $consulta);
-
-                while ($fila = mysqli_fetch_array($query)) {
-                    ?>
-                    <tr>
-                        <th scope="row">
-                            <?php echo $c; ?>
-                        </th>
-                        <td>
-                            <?php echo $fila['fabricante']; ?>
-                        </td>
-                        <td>
-                            <?php echo $fila['contador']; ?>
-                        </td>
-                        <td>
-                            <a href="delete/eliminar_fabrincante.php?id_fabricante=<?php echo $fila['id_fabricante']; ?>">
-                                <i class="bi bi-trash2-fill text-danger" style="font-size: 1.5rem;"></i>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="update/fabricante.php?id_fabricante=<?php echo $fila['id_fabricante']; ?>">
-                                <i class="bi bi-pencil-square text-warning" style="font-size: 1.5rem;"></i>
-                            </a>
-                        </td>
-                    </tr>
-                <?php $c++; } ?>
-            </tbody>
-        </table>
-        <!-- ========== End table ========== -->
-
+                        while ($fila = mysqli_fetch_array($query)) {
+                            ?>
+                            <tr>
+                                <th scope="row">
+                                    <?php echo $c; ?>
+                                </th>
+                                <td>
+                                    <?php echo $fila['fabricante']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $fila['contador']; ?>
+                                </td>
+                                <td>
+                                    <a
+                                        href="delete/eliminar_fabrincante.php?id_fabricante=<?php echo $fila['id_fabricante']; ?>">
+                                        <i class="bi bi-trash2-fill text-danger" style="font-size: 1.5rem;"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="update/fabricante.php?id_fabricante=<?php echo $fila['id_fabricante']; ?>">
+                                        <i class="bi bi-pencil-square text-warning" style="font-size: 1.5rem;"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <?php $c++;
+                        } ?>
+                    </tbody>
+                </table>
+                <!-- ========== End table ========== -->
+            </div>
+        </div>
     </main>
+
     <footer>
         <!-- place footer here -->
     </footer>

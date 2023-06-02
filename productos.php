@@ -18,81 +18,82 @@
         <!-- place navbar here -->
     </header>
     <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <!-- ========== Start formulario ========== -->
+                    <form action="insert/registro_producto.php" method="post">
+                        <div class="mb-3">
+                            <label class="form-label">Ingresa un producto</label>
+                            <input name="nombre_producto" type="text" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Precio</label>
+                            <input name="precio" type="number" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Fabricante</label>
+                            <select name="id_fabricante" class="form-select" aria-label="Default select example">
+                                <?php
+                                include('connection/connection.php');
 
-        <!-- ========== Start formulario ========== -->
-        <form action="insert/registro_producto.php" method="post">
-            <div class="mb-3">
-                <label class="form-label">Ingresa un producto</label>
-                <input name="nombre_producto" type="text" class="form-control" required>
+                                $consulta = "SELECT * FROM fabricante";
+                                $query = mysqli_query($conn, $consulta);
+
+                                while ($fila = mysqli_fetch_array($query)) {
+                                    ?>
+                                    <option value="<?php echo $fila['id_fabricante']; ?>"><?php echo $fila['nombre']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+                    <!-- ========== End formulario ========== -->
+                </div>
+                <div class="col-md-8">
+                    <!-- ========== Start table ========== -->
+                    <table class="table table-dark table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Fabricante</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            include('connection/connection.php');
+
+                            $consulta = "call p_verProductos()";
+                            $query = mysqli_query($conn, $consulta);
+
+                            while ($fila = mysqli_fetch_array($query)) {
+                                ?>
+                                <tr>
+                                    <th scope="row">
+                                        <?php echo $fila['id_producto']; ?>
+                                    </th>
+                                    <td>
+                                        <?php echo $fila['producto']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $fila['precio']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $fila['fabricantes']; ?>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                    <!-- ========== End table ========== -->
+                </div>
             </div>
-            <div class="mb-3">
-                <label class="form-label">Precio</label>
-                <input name="precio" type="number" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Fabricante</label>
-                <select name="id_fabricante" class="form-select" aria-label="Default select example">
-                    <?php
-                    include('connection/connection.php');
-
-                    $consulta = "SELECT*FROM fabricante";
-                    $query = mysqli_query($conn, $consulta);
-
-                    while ($fila = mysqli_fetch_array($query)) {
-                        ?>
-                        <option value="<?php echo $fila['id_fabricante']; ?>"><?php echo $fila['nombre']; ?></option>
-                    <?php } ?>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Enviar</button>
-        </form>
-
-        <form action="" method="post">
-
-        </form>
-
-        <!-- ========== End formulario ========== -->
-
-        <!-- ========== Start table ========== -->
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Producto</th>
-                    <th scope="col">Precio</th>
-                    <th scope="col">Fabricantes</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                include('connection/connection.php');
-
-                $consulta = "call p_verProductos()";
-                
-                $query = mysqli_query($conn, $consulta);
-
-                while ($fila = mysqli_fetch_array($query)) {
-                    ?>
-                    <tr>
-                        <th scope="row">
-                            <?php echo $fila['id_producto']; ?>
-                        </th>
-                        <td>
-                            <?php echo $fila['producto']; ?>
-                        </td>
-                        <td>
-                            <?php echo $fila['precio']; ?>
-                        </td>
-                        <td>
-                            <?php echo $fila['fabricantes']; ?>
-                        </td>
-                    </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-        <!-- ========== End table ========== -->
-
+        </div>
     </main>
+
     <footer>
         <!-- place footer here -->
     </footer>
